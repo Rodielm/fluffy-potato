@@ -88,14 +88,121 @@
             : 'Work Experience'
         "
       >
-        <div class="form-section">
-          <!-- Dynamic fields based on user type -->
+        <div
+          class="form-section"
+          *ngIf="userForm.get('type')?.value === 'employee'"
+        >
+          <button mat-button type="button" (click)="addWorkExperience()">
+            Add Work Experience
+          </button>
+          <div
+            formArrayName="workExperience"
+            *ngFor="let exp of workExperience.controls; let i = index"
+          >
+            <div class="form-section" [formGroupName]="i">
+              <mat-form-field>
+                <mat-label>Company Name</mat-label>
+                <input matInput formControlName="companyName" />
+                <mat-error *ngIf="exp.get('companyName')?.errors?.['required']">
+                  Company Name is required
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field>
+                <mat-label>Position</mat-label>
+                <input matInput formControlName="position" />
+                <mat-error *ngIf="exp.get('position')?.errors?.['required']">
+                  Position is required
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field>
+                <mat-label>Date</mat-label>
+                <input
+                  matInput
+                  [matDatepicker]="picker"
+                  formControlName="date"
+                />
+                <mat-datepicker-toggle
+                  matIconSuffix
+                  [for]="picker"
+                ></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+                <mat-error *ngIf="exp.get('date')?.errors?.['required']">
+                  Date is required
+                </mat-error>
+              </mat-form-field>
+
+              <button
+                mat-button
+                type="button"
+                (click)="removeWorkExperience(i)"
+              >
+                Remove
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="form-section"
+          *ngIf="userForm.get('type')?.value === 'applicant'"
+        >
+          <button mat-button type="button" (click)="addEducation()">
+            Add Education
+          </button>
+          <div
+            formArrayName="education"
+            *ngFor="let edu of education.controls; let i = index"
+          >
+            <div class="form-section" [formGroupName]="i">
+              <mat-form-field>
+                <mat-label>Institution Name</mat-label>
+                <input matInput formControlName="institutionName" />
+                <mat-error
+                  *ngIf="edu.get('institutionName')?.errors?.['required']"
+                >
+                  Institution Name is required
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field>
+                <mat-label>Degree</mat-label>
+                <input matInput formControlName="degree" />
+                <mat-error *ngIf="edu.get('degree')?.errors?.['required']">
+                  Degree is required
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field>
+                <mat-label>Date</mat-label>
+                <input
+                  matInput
+                  [matDatepicker]="picker"
+                  formControlName="date"
+                />
+                <mat-datepicker-toggle
+                  matIconSuffix
+                  [for]="picker"
+                ></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+                <mat-error *ngIf="edu.get('date')?.errors?.['required']">
+                  Date is required
+                </mat-error>
+              </mat-form-field>
+
+              <button mat-button type="button" (click)="removeEducation(i)">
+                Remove
+              </button>
+            </div>
+          </div>
         </div>
       </mat-tab>
     </mat-tab-group>
 
-    <div class="form-actions" *ngIf="mode !== 'view'">
+    <div class="form-actions">
       <button
+        *ngIf="mode !== 'view'"
         mat-raised-button
         color="primary"
         type="submit"
@@ -103,7 +210,9 @@
       >
         Save
       </button>
-      <button mat-button type="button" (click)="cancel()">Cancel</button>
+      <button mat-button type="button" (click)="cancel()">
+        {{ mode === "view" ? "Back" : "Cancel" }}
+      </button>
     </div>
   </form>
 </div>
