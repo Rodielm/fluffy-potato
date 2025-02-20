@@ -23,5 +23,5 @@ public class Employee {
     
     @ManyToOne
     @JoinColumn(name = "department_id")
-    private Deparment department;
+    private Department department;
 }

@@ -12,7 +12,7 @@ import lombok.Data;
 
 @Entity
 @Data
-public class Deparment {
+public class Department {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
