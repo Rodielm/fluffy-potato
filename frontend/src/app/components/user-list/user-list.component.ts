@@ -13,11 +13,11 @@ import { MatSelectModule } from '@angular/material/select';
   standalone: true,
   imports: [
     CommonModule,
-    RouterModule,
     FormsModule,
     MatTableModule,
     MatButtonModule,
     MatSelectModule,
+    RouterModule,
   ],
   templateUrl: './user-list.component.html',
   styleUrl: './user-list.component.css',
@@ -31,8 +31,13 @@ export class UserListComponent implements OnInit {
   constructor(private userService: UserService, private router: Router) {}
 
   ngOnInit(): void {
+    this.loadUsers();
+  }
+
+  loadUsers(): void {
     this.userService.getUsers().subscribe((users) => {
       this.users = users;
+      console.log('load users', this.users);
       this.filterUsers();
     });
   }
@@ -63,6 +68,7 @@ export class UserListComponent implements OnInit {
       )
     ) {
       this.userService.deleteUser(user.id);
+      this.loadUsers();
     }
   }
 }
