@@ -72,8 +72,13 @@ public class EmployeeService {
         Employee employee = employeeRepo.findById(employeeId)
                 .orElseThrow(() -> new RuntimeException("Employee not found"));
 
-        employee.setName(dto.getName());
-        employee.setLastName(dto.getLastName());
+        if (dto.getName() != null) {
+            employee.setName(dto.getName());
+        }
+
+        if (dto.getLastName() != null) {
+            employee.setLastName(dto.getLastName());
+        }
 
         if (dto.getDepartmentId() != null) {
             Department department = departmentRepo.findById(dto.getDepartmentId())
