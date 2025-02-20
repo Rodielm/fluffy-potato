@@ -8,7 +8,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 export class UserService {
   private users: User[] = [
     {
-      id: '1',
+      id: Date.now().toString(),
       documentId: '12345678A',
       firstName: 'John',
       lastName1: 'Doe',
