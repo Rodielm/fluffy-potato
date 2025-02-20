@@ -1,0 +1,18 @@
+.user-form-container {
+  width: 80%;
+  margin: 2em auto;
+}
+
+.form-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  padding: 1em;
+}
+
+.form-actions {
+  margin-top: 2em;
+  display: flex;
+  gap: 1em;
+  justify-content: flex-end;
+}

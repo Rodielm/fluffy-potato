@@ -1,0 +1,109 @@
+<div class="user-form-container">
+  <h2>
+    {{
+      mode === "view"
+        ? "User Details"
+        : mode === "edit"
+        ? "Edit User"
+        : "New User"
+    }}
+  </h2>
+
+  <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+    <mat-tab-group>
+      <mat-tab label="Personal Data">
+        <div class="form-section">
+          <mat-form-field>
+            <mat-label>Document ID</mat-label>
+            <input matInput formControlName="documentId" />
+            <mat-error *ngIf="userForm.get('documentId')?.errors?.['required']">
+              Document ID is required
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>First Name</mat-label>
+            <input matInput formControlName="firstName" />
+            <mat-error *ngIf="userForm.get('firstName')?.errors?.['required']">
+              First Name is required
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>First Last Name</mat-label>
+            <input matInput formControlName="lastName1" />
+            <mat-error *ngIf="userForm.get('lastName1')?.errors?.['required']">
+              First Last Name is required
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Second Last Name</mat-label>
+            <input matInput formControlName="lastName2" />
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>User Type</mat-label>
+            <mat-select formControlName="type">
+              <mat-option value="applicant">Applicant</mat-option>
+              <mat-option value="employee">Employee</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </mat-tab>
+
+      <mat-tab label="Address">
+        <div formGroupName="address" class="form-section">
+          <mat-form-field>
+            <mat-label>Street</mat-label>
+            <input matInput formControlName="street" />
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Number</mat-label>
+            <input matInput formControlName="number" />
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Door</mat-label>
+            <input matInput formControlName="door" />
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Postal Code</mat-label>
+            <input matInput formControlName="postalCode" />
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>City</mat-label>
+            <input matInput formControlName="city" />
+          </mat-form-field>
+        </div>
+      </mat-tab>
+
+      <mat-tab
+        [label]="
+          userForm.get('type')?.value === 'applicant'
+            ? 'Education'
+            : 'Work Experience'
+        "
+      >
+        <div class="form-section">
+          <!-- Dynamic fields based on user type -->
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+
+    <div class="form-actions" *ngIf="mode !== 'view'">
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="userForm.invalid"
+      >
+        Save
+      </button>
+      <button mat-button type="button" (click)="cancel()">Cancel</button>
+    </div>
+  </form>
+</div>
