@@ -14,7 +14,7 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping("/api/departments")
 @RequiredArgsConstructor
-public class DeparmentCtrl {
+public class DepartmentCtrl {
     private final DepartmentService departmentService;
 
     @PostMapping
