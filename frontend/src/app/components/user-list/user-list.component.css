@@ -1,0 +1,15 @@
+.user-list-container {
+  width: 90%;
+  margin: 2em auto;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2em;
+}
+
+.mat-mdc-table {
+  width: 100%;
+}
